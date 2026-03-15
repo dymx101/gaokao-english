@@ -67,3 +67,20 @@ export const userAttempts = sqliteTable(
     ),
   }),
 );
+
+export const userMistakes = sqliteTable(
+  "user_mistakes",
+  {
+    userId: text("user_id").notNull(),
+    vocabId: integer("vocab_id").notNull(),
+    mistakeCount: integer("mistake_count").notNull(),
+    mistakeLevel: text("mistake_level").notNull(), // careless | stubborn | similar_confusion
+    lastMistakeAt: integer("last_mistake_at", { mode: "timestamp" }).notNull(),
+    confusionWith: text("confusion_with", { mode: "json" }),
+  },
+  (t) => ({
+    uniq: uniqueIndex("user_mistakes_user_vocab_uniq").on(t.userId, t.vocabId),
+    levelIdx: index("user_mistakes_level_idx").on(t.userId, t.mistakeLevel),
+    lastIdx: index("user_mistakes_last_idx").on(t.userId, t.lastMistakeAt),
+  }),
+);

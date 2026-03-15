@@ -1,16 +1,18 @@
 import express from "express";
 import cors from "cors";
 import { z } from "zod";
-import { and, asc, eq, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, lte, sql } from "drizzle-orm";
 
 import { db } from "./db/client.js";
 import {
   userAttempts,
+  userMistakes,
   userVocabState,
   users,
   vocabItems,
 } from "./db/schema.js";
 import { seedVocabIfEmpty } from "./seed/seedVocab.js";
+import { levenshtein } from "./utils/levenshtein.js";
 
 const app = express();
 app.use(cors());
@@ -164,14 +166,60 @@ app.get("/api/v1/word/:id", async (req, res) => {
   });
 });
 
+app.get("/api/v1/mistakes", async (req, res) => {
+  const userId = getUserId(req);
+  await ensureUser(userId);
+
+  const levelRaw = req.query.level;
+  const level =
+    levelRaw === "careless" ||
+    levelRaw === "stubborn" ||
+    levelRaw === "similar_confusion"
+      ? levelRaw
+      : null;
+
+  const limit = Math.min(200, Math.max(1, Number(req.query.limit ?? 50)));
+  const offset = Math.max(0, Number(req.query.offset ?? 0));
+
+  const rows = await db
+    .select({
+      vocabId: userMistakes.vocabId,
+      mistakeCount: userMistakes.mistakeCount,
+      mistakeLevel: userMistakes.mistakeLevel,
+      lastMistakeAt: userMistakes.lastMistakeAt,
+      word: vocabItems.word,
+      pos: vocabItems.pos,
+      meaningZh: vocabItems.meaningZh,
+    })
+    .from(userMistakes)
+    .innerJoin(vocabItems, eq(userMistakes.vocabId, vocabItems.id))
+    .where(
+      level
+        ? and(
+            eq(userMistakes.userId, userId),
+            eq(userMistakes.mistakeLevel, level),
+          )
+        : eq(userMistakes.userId, userId),
+    )
+    .orderBy(desc(userMistakes.lastMistakeAt))
+    .limit(limit)
+    .offset(offset);
+
+  res.json({ items: rows, limit, offset, level });
+});
+
 const AttemptSubmitSchema = z.object({
   vocabId: z.number().int().positive(),
   questionType: z.enum(["flashcard", "mcq", "cloze", "semantic"]),
   isCorrect: z.boolean(),
   responseMs: z.number().int().min(0),
   changedAnswer: z.boolean().optional(),
-  // meta is accepted but ignored in M1.
-  meta: z.any().optional(),
+  meta: z
+    .object({
+      choice: z.string().optional(),
+      options: z.array(z.string()).optional(),
+    })
+    .optional(),
 });
 
 function computeNewState(input: {
@@ -213,7 +261,7 @@ app.post("/api/v1/attempts", async (req, res) => {
       .json({ error: "invalid_request", details: parsed.error.flatten() });
   }
 
-  const { vocabId, questionType, isCorrect, responseMs, changedAnswer } =
+  const { vocabId, questionType, isCorrect, responseMs, changedAnswer, meta } =
     parsed.data;
 
   // Ensure vocab exists.
@@ -277,12 +325,82 @@ app.post("/api/v1/attempts", async (req, res) => {
       },
     });
 
+  // Mistakes aggregation (M2): only update on wrong answers.
+  let mistakeSummary: null | {
+    mistakeCount: number;
+    mistakeLevel: "careless" | "stubborn" | "similar_confusion";
+  } = null;
+
+  if (!isCorrect) {
+    const existing = await db
+      .select({
+        mistakeCount: userMistakes.mistakeCount,
+        confusionWith: userMistakes.confusionWith,
+      })
+      .from(userMistakes)
+      .where(and(eq(userMistakes.userId, userId), eq(userMistakes.vocabId, vocabId)))
+      .limit(1);
+
+    const prevCount = existing[0]?.mistakeCount ?? 0;
+    const newCount = prevCount + 1;
+
+    // Minimal heuristic v1:
+    // - similar_confusion if meta.choice exists and is similar to target word
+    // - stubborn if >= 3
+    // - else careless
+    let level: "careless" | "stubborn" | "similar_confusion" =
+      newCount >= 3 ? "stubborn" : "careless";
+
+    if (meta?.choice) {
+      const choice = meta.choice.toLowerCase();
+      const target = (
+        await db
+          .select({ word: vocabItems.word })
+          .from(vocabItems)
+          .where(eq(vocabItems.id, vocabId))
+          .limit(1)
+      )[0]?.word?.toLowerCase();
+
+      if (target && levenshtein(choice, target) <= 2) {
+        level = "similar_confusion";
+      }
+    }
+
+    const prevConf = (existing[0]?.confusionWith ?? null) as null | string[];
+    const nextConf = meta?.choice
+      ? Array.from(new Set([...(prevConf ?? []), meta.choice])).slice(0, 10)
+      : prevConf;
+
+    await db
+      .insert(userMistakes)
+      .values({
+        userId,
+        vocabId,
+        mistakeCount: newCount,
+        mistakeLevel: level,
+        lastMistakeAt: now,
+        confusionWith: nextConf ?? null,
+      })
+      .onConflictDoUpdate({
+        target: [userMistakes.userId, userMistakes.vocabId],
+        set: {
+          mistakeCount: newCount,
+          mistakeLevel: level,
+          lastMistakeAt: now,
+          confusionWith: nextConf ?? null,
+        },
+      });
+
+    mistakeSummary = { mistakeCount: newCount, mistakeLevel: level };
+  }
+
   res.json({
     updatedState: {
       status: next.status,
       strength: next.strength,
       nextReviewAt: next.nextReviewAt.toISOString(),
     },
+    mistake: mistakeSummary,
   });
 });
 
