@@ -1,0 +1,351 @@
+[
+  {
+    "word": "abandon",
+    "pos": "v.",
+    "meaningZh": ["放弃", "抛弃"],
+    "phonetic": "/əˈbændən/"
+  },
+  {
+    "word": "ability",
+    "pos": "n.",
+    "meaningZh": ["能力"],
+    "phonetic": "/əˈbɪləti/"
+  },
+  {
+    "word": "abroad",
+    "pos": "adv.",
+    "meaningZh": ["在国外"],
+    "phonetic": "/əˈbrɔːd/"
+  },
+  {
+    "word": "absent",
+    "pos": "adj.",
+    "meaningZh": ["缺席的"],
+    "phonetic": "/ˈæbsənt/"
+  },
+  {
+    "word": "absolute",
+    "pos": "adj.",
+    "meaningZh": ["绝对的"],
+    "phonetic": "/ˈæbsəluːt/"
+  },
+  {
+    "word": "absorb",
+    "pos": "v.",
+    "meaningZh": ["吸收", "理解"],
+    "phonetic": "/əbˈzɔːrb/"
+  },
+  {
+    "word": "academic",
+    "pos": "adj.",
+    "meaningZh": ["学术的"],
+    "phonetic": "/ˌækəˈdemɪk/"
+  },
+  {
+    "word": "access",
+    "pos": "n./v.",
+    "meaningZh": ["通道", "获得"],
+    "phonetic": "/ˈækses/"
+  },
+  {
+    "word": "accomplish",
+    "pos": "v.",
+    "meaningZh": ["完成", "实现"],
+    "phonetic": "/əˈkɑːmplɪʃ/"
+  },
+  {
+    "word": "account",
+    "pos": "n.",
+    "meaningZh": ["账户", "描述"],
+    "phonetic": "/əˈkaʊnt/"
+  },
+  {
+    "word": "accurate",
+    "pos": "adj.",
+    "meaningZh": ["准确的"],
+    "phonetic": "/ˈækjərət/"
+  },
+  {
+    "word": "achieve",
+    "pos": "v.",
+    "meaningZh": ["达到", "实现"],
+    "phonetic": "/əˈtʃiːv/"
+  },
+  {
+    "word": "acquire",
+    "pos": "v.",
+    "meaningZh": ["获得", "学到"],
+    "phonetic": "/əˈkwaɪər/"
+  },
+  {
+    "word": "adapt",
+    "pos": "v.",
+    "meaningZh": ["适应", "改编"],
+    "phonetic": "/əˈdæpt/"
+  },
+  {
+    "word": "addict",
+    "pos": "n.",
+    "meaningZh": ["上瘾的人"],
+    "phonetic": "/ˈædɪkt/"
+  },
+  {
+    "word": "adequate",
+    "pos": "adj.",
+    "meaningZh": ["足够的"],
+    "phonetic": "/ˈædɪkwət/"
+  },
+  {
+    "word": "adjust",
+    "pos": "v.",
+    "meaningZh": ["调整"],
+    "phonetic": "/əˈdʒʌst/"
+  },
+  {
+    "word": "admire",
+    "pos": "v.",
+    "meaningZh": ["钦佩", "欣赏"],
+    "phonetic": "/ədˈmaɪər/"
+  },
+  {
+    "word": "admit",
+    "pos": "v.",
+    "meaningZh": ["承认", "准许进入"],
+    "phonetic": "/ədˈmɪt/"
+  },
+  {
+    "word": "adopt",
+    "pos": "v.",
+    "meaningZh": ["采用", "收养"],
+    "phonetic": "/əˈdɑːpt/"
+  },
+  {
+    "word": "advance",
+    "pos": "n./v.",
+    "meaningZh": ["前进", "进步"],
+    "phonetic": "/ədˈvæns/"
+  },
+  {
+    "word": "advantage",
+    "pos": "n.",
+    "meaningZh": ["优势"],
+    "phonetic": "/ədˈvæntɪdʒ/"
+  },
+  {
+    "word": "adventure",
+    "pos": "n.",
+    "meaningZh": ["冒险"],
+    "phonetic": "/ədˈventʃər/"
+  },
+  {
+    "word": "affect",
+    "pos": "v.",
+    "meaningZh": ["影响"],
+    "phonetic": "/əˈfekt/"
+  },
+  {
+    "word": "afford",
+    "pos": "v.",
+    "meaningZh": ["负担得起"],
+    "phonetic": "/əˈfɔːrd/"
+  },
+  {
+    "word": "afterward",
+    "pos": "adv.",
+    "meaningZh": ["后来"],
+    "phonetic": "/ˈæftərwərd/"
+  },
+  {
+    "word": "agency",
+    "pos": "n.",
+    "meaningZh": ["机构"],
+    "phonetic": "/ˈeɪdʒənsi/"
+  },
+  {
+    "word": "aggressive",
+    "pos": "adj.",
+    "meaningZh": ["好斗的", "进取的"],
+    "phonetic": "/əˈɡresɪv/"
+  },
+  { "word": "aid", "pos": "n./v.", "meaningZh": ["帮助"], "phonetic": "/eɪd/" },
+  {
+    "word": "aim",
+    "pos": "n./v.",
+    "meaningZh": ["目标", "瞄准"],
+    "phonetic": "/eɪm/"
+  },
+  {
+    "word": "alarm",
+    "pos": "n./v.",
+    "meaningZh": ["警报", "使担心"],
+    "phonetic": "/əˈlɑːrm/"
+  },
+  {
+    "word": "alternative",
+    "pos": "n./adj.",
+    "meaningZh": ["替代方案", "替代的"],
+    "phonetic": "/ɔːlˈtɜːrnətɪv/"
+  },
+  {
+    "word": "amaze",
+    "pos": "v.",
+    "meaningZh": ["使惊讶"],
+    "phonetic": "/əˈmeɪz/"
+  },
+  {
+    "word": "ambitious",
+    "pos": "adj.",
+    "meaningZh": ["有雄心的"],
+    "phonetic": "/æmˈbɪʃəs/"
+  },
+  {
+    "word": "analysis",
+    "pos": "n.",
+    "meaningZh": ["分析"],
+    "phonetic": "/əˈnæləsɪs/"
+  },
+  {
+    "word": "announce",
+    "pos": "v.",
+    "meaningZh": ["宣布"],
+    "phonetic": "/əˈnaʊns/"
+  },
+  {
+    "word": "anxious",
+    "pos": "adj.",
+    "meaningZh": ["焦虑的", "渴望的"],
+    "phonetic": "/ˈæŋkʃəs/"
+  },
+  {
+    "word": "appeal",
+    "pos": "n./v.",
+    "meaningZh": ["吸引力", "呼吁"],
+    "phonetic": "/əˈpiːl/"
+  },
+  {
+    "word": "approve",
+    "pos": "v.",
+    "meaningZh": ["批准", "赞成"],
+    "phonetic": "/əˈpruːv/"
+  },
+  {
+    "word": "arise",
+    "pos": "v.",
+    "meaningZh": ["出现", "产生"],
+    "phonetic": "/əˈraɪz/"
+  },
+  {
+    "word": "arrange",
+    "pos": "v.",
+    "meaningZh": ["安排", "整理"],
+    "phonetic": "/əˈreɪndʒ/"
+  },
+  {
+    "word": "aspect",
+    "pos": "n.",
+    "meaningZh": ["方面"],
+    "phonetic": "/ˈæspekt/"
+  },
+  {
+    "word": "assist",
+    "pos": "v.",
+    "meaningZh": ["协助"],
+    "phonetic": "/əˈsɪst/"
+  },
+  {
+    "word": "assume",
+    "pos": "v.",
+    "meaningZh": ["假设", "认为"],
+    "phonetic": "/əˈsuːm/"
+  },
+  {
+    "word": "attempt",
+    "pos": "n./v.",
+    "meaningZh": ["尝试"],
+    "phonetic": "/əˈtempt/"
+  },
+  {
+    "word": "attend",
+    "pos": "v.",
+    "meaningZh": ["参加", "照料"],
+    "phonetic": "/əˈtend/"
+  },
+  {
+    "word": "attract",
+    "pos": "v.",
+    "meaningZh": ["吸引"],
+    "phonetic": "/əˈtrækt/"
+  },
+  {
+    "word": "authority",
+    "pos": "n.",
+    "meaningZh": ["权威", "当局"],
+    "phonetic": "/əˈθɔːrəti/"
+  },
+  {
+    "word": "available",
+    "pos": "adj.",
+    "meaningZh": ["可获得的"],
+    "phonetic": "/əˈveɪləbl/"
+  },
+  {
+    "word": "average",
+    "pos": "adj./n.",
+    "meaningZh": ["平均的", "平均值"],
+    "phonetic": "/ˈævərɪdʒ/"
+  },
+  {
+    "word": "aware",
+    "pos": "adj.",
+    "meaningZh": ["意识到的"],
+    "phonetic": "/əˈwer/"
+  },
+  {
+    "word": "balance",
+    "pos": "n./v.",
+    "meaningZh": ["平衡", "使平衡"],
+    "phonetic": "/ˈbæləns/"
+  },
+  {
+    "word": "benefit",
+    "pos": "n./v.",
+    "meaningZh": ["益处", "使受益"],
+    "phonetic": "/ˈbenɪfɪt/"
+  },
+  {
+    "word": "challenge",
+    "pos": "n./v.",
+    "meaningZh": ["挑战"],
+    "phonetic": "/ˈtʃælɪndʒ/"
+  },
+  {
+    "word": "concentrate",
+    "pos": "v.",
+    "meaningZh": ["集中注意力"],
+    "phonetic": "/ˈkɑːnsntreɪt/"
+  },
+  {
+    "word": "confidence",
+    "pos": "n.",
+    "meaningZh": ["自信"],
+    "phonetic": "/ˈkɑːnfɪdəns/"
+  },
+  {
+    "word": "consider",
+    "pos": "v.",
+    "meaningZh": ["考虑", "认为"],
+    "phonetic": "/kənˈsɪdər/"
+  },
+  {
+    "word": "contribute",
+    "pos": "v.",
+    "meaningZh": ["贡献"],
+    "phonetic": "/kənˈtrɪbjuːt/"
+  },
+  {
+    "word": "convenient",
+    "pos": "adj.",
+    "meaningZh": ["方便的"],
+    "phonetic": "/kənˈviːniənt/"
+  }
+]

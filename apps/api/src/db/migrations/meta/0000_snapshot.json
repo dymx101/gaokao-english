@@ -77,9 +77,7 @@
       "indexes": {
         "vocab_items_word_unique": {
           "name": "vocab_items_word_unique",
-          "columns": [
-            "word"
-          ],
+          "columns": ["word"],
           "isUnique": true
         }
       },

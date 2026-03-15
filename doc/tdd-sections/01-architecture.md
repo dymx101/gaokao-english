@@ -5,7 +5,9 @@
 ## 1.1 逻辑架构
 
 ### Components
-1) **Web/App 前端**
+
+1. **Web/App 前端**
+
 - Responsibilities:
   - 词卡学习与练习（flashcard/mcq/cloze/semantic）
   - 错词本浏览、筛选、手动标注
@@ -15,7 +17,8 @@
 - Non-responsibilities:
   - 不直接调用模型供应商；统一走后端 AI API
 
-2) **Backend API (monolith v1)**
+2. **Backend API (monolith v1)**
+
 - Responsibilities:
   - 鉴权与用户隔离
   - 词库与真题内容读取
@@ -24,17 +27,20 @@
   - AI 调用编排 + 缓存 + 限流
   - 导出任务（异步）
 
-3) **AI 服务层（可插拔）**
+3. **AI 服务层（可插拔）**
+
 - Responsibilities:
   - 对外提供结构化 JSON 输出
   - 统一超时、重试、审计、缓存键生成
   - Provider 实现可替换（OpenAI/其他/本地）
 
-4) **内容/数据层**
+4. **内容/数据层**
+
 - vocab_items (3500) + exam_sentences + 词频统计
 - TTS 音频缓存（本地或对象存储）
 
-5) **任务队列/异步**
+5. **任务队列/异步**
+
 - PDF 导出、批量预生成缓存、离线数据清洗
 
 ## 1.2 运行时拓扑（推荐 v1）
@@ -61,6 +67,7 @@ src/web/
 ```
 
 ### Layering rules
+
 - `api/` 只做输入校验、鉴权、调用 service、序列化输出
 - `services/` 不依赖 web 框架；通过 repository + ai client 完成业务
 - `ai/` 不直接读写 DB；只暴露纯函数（prompt/build/validate）+ client wrapper
@@ -69,23 +76,28 @@ src/web/
 ## 1.4 关键横切能力
 
 ### Auth
+
 - v1: 简化为 session token / JWT（按需求）
 - 所有 user-scoped 表必须有 `user_id` 作为分区键
 
 ### Rate limit + quota
+
 - 在 `services/aiQuotaService` 中实现：
   - key = `userId + aiType + yyyy-mm-dd`
   - store = DB/Redis
 
 ### Caching
+
 - AI artifacts: DB 缓存（`ai_artifacts`）
 - TTS: 文件/对象存储缓存（key = word+accent+speed）
 
 ### Observability
+
 - Request id、structured logs
 - Metrics events（见 §09）
 
 ## 1.5 Deployment notes
+
 - 先单体部署；当 AI/导出压力高时拆：
   - `export-worker`
   - `ai-worker`（可队列化生成，前端轮询/长轮询）

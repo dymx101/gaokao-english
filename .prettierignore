@@ -1,0 +1,5 @@
+**/node_modules/**
+**/dist/**
+**/.next/**
+**/src/db/migrations/**
+**/dev.sqlite3

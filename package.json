@@ -5,7 +5,16 @@
   "scripts": {
     "dev": "pnpm -C apps/web dev",
     "dev:api": "pnpm -C apps/api dev",
+    "dev:lan": "node scripts/dev-lan.mjs",
+    "build": "pnpm -r build",
     "lint": "pnpm -r lint",
+    "format": "prettier -w .",
+    "format:check": "prettier -c .",
+    "db:generate": "pnpm -C apps/api db:generate",
+    "db:migrate": "pnpm -C apps/api db:migrate",
     "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1"
   }
 }
