@@ -20,6 +20,13 @@
 - [x] TASK-014: Web: Session page (`/session/[id]`) with QuestionRenderer（当前 flashcard + 自评 mcq stub）
 - [x] TASK-015: Word detail page (`/word/[vocabId]`) minimal
 
+### M2 — Mistakes system
+
+- [x] TASK-020: Implement `user_mistakes` upsert logic
+- [x] TASK-021: Implement `GET /api/v1/mistakes`
+- [x] TASK-022: Web: Mistakes page (`/mistakes`) with tabs
+- [x] TASK-023: “Drill mistakes” start flow
+
 ---
 
 ## 日志
@@ -61,12 +68,25 @@
     - 启动 web：`pnpm dev`
     - 浏览器访问：`http://localhost:3000/today`
 
+- ✅ 完成 TASK-020 / TASK-021 / TASK-022 / TASK-023：错词本（M2）
+  - API：
+    - 新增表：`user_mistakes`
+    - 错误 attempt 会自动 upsert：`mistake_count` + `mistake_level`（careless/stubborn/similar_confusion）
+    - `GET /api/v1/mistakes?level=stubborn&limit=50&offset=0`
+  - Web：
+    - 新增 `/mistakes`（tab：全部/粗心/顽固/易混）
+    - “开始 Drill” 会把当前 tab 下的错词生成一个本地 session 并进入 `/session/...`
+  - 验证：
+    - 先在 `/session/...` 里点几次“我错了”制造错词
+    - 打开：`http://localhost:3000/mistakes` 查看列表并 Drill
+
 - ✅ 增加：局域网手机测试启动脚本（LAN dev）
   - 新增：`pnpm dev:lan`
   - 行为：自动探测本机局域网 IPv4，启动：
-    - web: `0.0.0.0:3000`
-    - api: `0.0.0.0:3001`
-    - 并注入 `NEXT_PUBLIC_API_URL=http://<LAN_IP>:3001`
+    - web: `0.0.0.0:<auto>`
+    - api: `0.0.0.0:<auto>`
+    - 并注入 `NEXT_PUBLIC_API_URL=http://<LAN_IP>:<apiPort>`
+  - 端口策略：如果 3000/3001 被占用，会自动向上找空闲端口，避免 EADDRINUSE
   - 验证：
     - 运行：`pnpm dev:lan`
-    - 用手机/同网段设备访问：`http://<LAN_IP>:3000/today`
+    - 以终端输出的 URL 为准，用手机/同网段设备访问（例如：`http://<LAN_IP>:<webPort>/today`)
