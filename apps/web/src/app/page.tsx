@@ -14,12 +14,18 @@ export default function Home() {
 
       <div className="rounded-xl border p-4">
         <div className="text-sm font-medium">从这里开始</div>
-        <div className="mt-3 flex gap-3">
+        <div className="mt-3 flex flex-wrap gap-3">
           <Link
             href="/today"
             className="inline-flex h-10 items-center justify-center rounded-md bg-black px-4 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-black"
           >
             今日任务
+          </Link>
+          <Link
+            href="/mistakes"
+            className="inline-flex h-10 items-center justify-center rounded-md border px-4 text-sm font-medium"
+          >
+            错词本
           </Link>
         </div>
       </div>

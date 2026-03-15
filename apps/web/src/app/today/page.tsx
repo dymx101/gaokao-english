@@ -117,9 +117,14 @@ export default function TodayPage() {
       ) : null}
 
       <footer className="pt-2 text-xs text-zinc-500">
-        <Link href="/" className="underline">
-          ← 返回首页
-        </Link>
+        <div className="flex gap-3">
+          <Link href="/mistakes" className="underline">
+            错词本
+          </Link>
+          <Link href="/" className="underline">
+            首页
+          </Link>
+        </div>
       </footer>
     </main>
   );
